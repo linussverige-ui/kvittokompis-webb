@@ -31,10 +31,17 @@ const { chromium } = require('playwright');
       assert.ok(metrics.iconsLoaded, 'Icon did not load at '+width+'px');
       assert.ok(metrics.navScriptLoaded, 'Navigation JavaScript missing at '+width+'px');
       assert.deepEqual(errors, [], 'JavaScript error at '+width+'px');
-      for (const id of ['sa-funkar-det', 'funktioner', 'branscher', 'planer', 'installera', 'fragor']) {
+      for (const id of ['sa-funkar-det', 'redovisare', 'funktioner', 'branscher', 'planer', 'installera', 'fragor']) {
         assert.equal(await page.locator('#'+id).count(),1, 'Missing '+id);
       }
       assert.ok(await page.locator('a[href="https://kvittokompis-test-2q67.onrender.com/login"]').count() >= 2);
+      assert.equal(await page.locator('.landing-accountant__paper').count(),1);
+      assert.ok(await page.locator('a[href="#redovisare"]').count()>=2,'PDF links inaccessible');
+      const pdfPanel = await page.locator('.landing-accountant').evaluate(el => ({
+        width:el.scrollWidth,
+        clientWidth:el.clientWidth
+      }));
+      assert.ok(pdfPanel.width<=pdfPanel.clientWidth+1,'PDF panel overflows at '+width+'px');
 
       const install = page.locator('.landing-install-card').first();
       await install.locator('summary').click();
