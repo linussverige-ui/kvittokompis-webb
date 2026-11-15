@@ -1,6 +1,6 @@
 """Safety and link contracts for the standalone public marketing site.
 
-Run: python scripts/check_marketing_site.py
+Run: python scripts/check_site.py
 No network, credentials, production data or external packages required.
 """
 from html.parser import HTMLParser
@@ -49,14 +49,22 @@ def verify():
     assert "innehall" in parser.ids
     assert "installera" in parser.ids
     assert "Hantverkare" in page
-    assert "Frisör & salong" in page
+    assert "Frisör &amp; salong" in page or "Frisör & salong" in page
     assert "Frilansare" in page
     assert "Förhandsvisning" in page or "Förhandsversion" in page
     assert "Använd endast påhittade testuppgifter" in page
     assert "inte verifierad" in page
     assert "APK" in page
     assert "noindex, nofollow" in page
-    assert not any(tag in ("script", "iframe", "form") for tag, _ in parser.tags)
+    assert not any(tag in ("iframe", "form") for tag, _ in parser.tags)
+    scripts = [attrs for tag, attrs in parser.tags if tag == "script"]
+    assert len(scripts) == 1 and scripts[0].get("src") == "./navigation.js" and "defer" in scripts[0], "Only vetted first-party navigation script allowed"
+    js = (SITE / "navigation.js").read_text(encoding="utf-8")
+    assert "querySelector('.landing-mobile-nav')" in js and "menu.open = false" in js
+    assert not any(token in js for token in ("fetch(", "XMLHttpRequest", "localStorage", "sendBeacon", "eval(")), "Navigation must remain local/privacy-first"
+    assert page.count('class="landing-feature"') == 4, "Expected compact feature grid"
+    assert page.count('class="landing-industry ') == 2, "Expected two focused industry cards"
+    assert page.count('class="landing-install-card"') == 2, "Expected collapsible installation guides"
     assert "{%" not in page and "{{" not in page
     assert "<!-- private" not in page.lower()
     for href in parser.links:
