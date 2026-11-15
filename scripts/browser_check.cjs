@@ -81,6 +81,7 @@ const { chromium } = require('playwright');
             header:rect('.landing-header__inner'),
             preview:rect('.landing-preview'),
             titleSize:parseFloat(getComputedStyle(title).fontSize),
+            titleHeight:rect('.landing-hero h1').height,
             heroColumns:getComputedStyle(hero).gridTemplateColumns.split(' ').length,
             introColumns:getComputedStyle(intro).gridTemplateColumns.split(' ').length,
             primaryHeight:rect('.landing-hero__actions .landing-button--primary').height,
@@ -95,6 +96,10 @@ const { chromium } = require('playwright');
         assert.ok(desktop.header.width <= width, 'Desktop navigation overflow');
         if (width >= 1280) {
           assert.ok(desktop.preview.width >= 370, 'Wide desktop product preview under-sized');
+          assert.ok(desktop.titleHeight / desktop.titleSize < 2.4,
+            'Wide desktop heading should fit in two intentional lines: '+JSON.stringify(desktop));
+          await page.evaluate(() => window.scrollTo({top:0,left:0,behavior:'instant'}));
+          await page.waitForFunction(() => window.scrollY <= 1);
           await page.screenshot({path:path.join(screenshots,'hero-'+width+'px.png'),fullPage:false});
         }
       }
