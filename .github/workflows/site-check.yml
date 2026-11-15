@@ -1,0 +1,25 @@
+name: Kontrollera KvittoKompis hemsida
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "landing.css"
+      - "assets/**"
+      - "scripts/check_site.py"
+      - ".github/workflows/site-check.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  site-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Kontrollera hemsidans filer och länkar
+        run: python3 scripts/check_site.py
