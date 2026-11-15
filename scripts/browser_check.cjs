@@ -11,7 +11,7 @@ const { chromium } = require('playwright');
   fs.mkdirSync(screenshots, {recursive: true});
   const browser = await chromium.launch({headless: true});
   try {
-    for (const width of [320, 360, 390, 430, 550, 768, 800, 1024, 1280, 1440]) {
+    for (const width of [320, 360, 390, 430, 550, 768, 800, 900, 1024, 1280, 1440, 1600, 1920]) {
       const page = await browser.newPage({viewport: {width, height: 900}, deviceScaleFactor: 1});
       const errors = [];
       page.on('pageerror', err => errors.push(err.message));
@@ -67,6 +67,36 @@ const { chromium } = require('playwright');
       } else {
         assert.equal(await page.locator('.landing-nav').isVisible(),true,'Desktop navigation missing');
         assert.equal(await page.locator('.landing-header__app').isVisible(),false,'Mobile CTA visible on desktop');
+        const desktop = await page.evaluate(() => {
+          const rect = selector => {
+            const r = document.querySelector(selector).getBoundingClientRect();
+            return {left:r.left, right:r.right, top:r.top, bottom:r.bottom, width:r.width, height:r.height};
+          };
+          const title = document.querySelector('.landing-hero h1');
+          const hero = document.querySelector('.landing-hero__grid');
+          const intro = document.querySelector('#sa-funkar-det .landing-section__intro');
+          return {
+            copy:rect('.landing-hero__copy'),
+            showcase:rect('.landing-showcase'),
+            header:rect('.landing-header__inner'),
+            preview:rect('.landing-preview'),
+            titleSize:parseFloat(getComputedStyle(title).fontSize),
+            heroColumns:getComputedStyle(hero).gridTemplateColumns.split(' ').length,
+            introColumns:getComputedStyle(intro).gridTemplateColumns.split(' ').length,
+            primaryHeight:rect('.landing-hero__actions .landing-button--primary').height,
+          };
+        });
+        assert.equal(desktop.heroColumns, 2, 'Desktop hero must stay two columns: '+JSON.stringify(desktop));
+        assert.equal(desktop.introColumns, 2, 'Desktop section headings should have editorial columns');
+        assert.ok(desktop.copy.right < desktop.showcase.left + 1, 'Hero copy must not overlap showcase: '+JSON.stringify(desktop));
+        assert.ok(desktop.preview.width >= 250, 'Product preview is too small at '+width+'px');
+        assert.ok(desktop.titleSize >= 35, 'Desktop heading too small at '+width+'px');
+        assert.ok(desktop.primaryHeight >= 44, 'Primary desktop CTA too small');
+        assert.ok(desktop.header.width <= width, 'Desktop navigation overflow');
+        if (width >= 1280) {
+          assert.ok(desktop.preview.width >= 370, 'Wide desktop product preview under-sized');
+          await page.screenshot({path:path.join(screenshots,'hero-'+width+'px.png'),fullPage:false});
+        }
       }
       await page.locator('.landing-faq details').first().locator('summary').click();
       assert.ok(await page.locator('.landing-faq details').first().evaluate(el => el.open), 'FAQ failed');
