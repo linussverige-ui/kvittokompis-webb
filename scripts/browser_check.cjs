@@ -62,7 +62,7 @@ const { chromium } = require('playwright');
           menu: document.querySelector('.landing-mobile-nav summary').getBoundingClientRect().height,
           primary: document.querySelector('.landing-hero__actions .landing-button--primary').getBoundingClientRect().height
         }));
-        assert.ok(hitSizes.menu >= 40 && hitSizes.primary >= 44,
+        assert.ok(hitSizes.menu >= 44 && hitSizes.primary >= 44,
           'Tiny mobile tap target '+width+'px: '+JSON.stringify(hitSizes));
       } else {
         assert.equal(await page.locator('.landing-nav').isVisible(),true,'Desktop navigation missing');
@@ -70,6 +70,9 @@ const { chromium } = require('playwright');
       }
       await page.locator('.landing-faq details').first().locator('summary').click();
       assert.ok(await page.locator('.landing-faq details').first().evaluate(el => el.open), 'FAQ failed');
+      // Screenshot the real default state, not the artificially expanded test state.
+      await page.locator('.landing-faq details').first().locator('summary').click();
+      assert.ok(!(await page.locator('.landing-faq details').first().evaluate(el => el.open)));
       await page.evaluate(() => scrollTo(0, 0));
       await page.screenshot({path: path.join(screenshots,'kvitto-kompis-'+width+'px.png'),fullPage:true});
       console.log('PASS '+width+'px, height='+metrics.pageHeight+'px, no overflow, menu and FAQ work');
