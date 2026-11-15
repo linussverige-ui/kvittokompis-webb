@@ -6,6 +6,7 @@ on:
     paths:
       - "index.html"
       - "landing.css"
+      - "navigation.js"
       - "assets/**"
       - ".nojekyll"
       - ".github/workflows/pages.yml"
@@ -34,7 +35,7 @@ jobs:
       - name: Packa enbart publika webbplatsfiler
         run: |
           mkdir -p _site/assets
-          cp index.html landing.css .nojekyll _site/
+          cp index.html landing.css navigation.js .nojekyll _site/
           cp assets/*.svg _site/assets/
       - name: Ladda upp Pages-filer
         uses: actions/upload-pages-artifact@v3
