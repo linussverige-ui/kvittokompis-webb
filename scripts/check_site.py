@@ -48,6 +48,12 @@ def verify():
     assert parser.h1 == 1
     assert "innehall" in parser.ids
     assert "installera" in parser.ids
+    assert "redovisare" in parser.ids, "Missing accountant/PDF section"
+    assert 'href="#redovisare"' in page, "Missing PDF navigation"
+    assert "kvittobilagor" in page.lower(), "Missing receipt attachments"
+    assert "Excel" in page and "PDF" in page
+    assert "Direktdelning inifrån appen är inte verifierad" in page, "No unverified in-app sending claim"
+    assert "Illustration – inte ett faktiskt exporterat dokument" in page
     assert "Hantverkare" in page
     assert "Frisör &amp; salong" in page or "Frisör & salong" in page
     assert "Frilansare" in page
