@@ -55,7 +55,8 @@ const { chromium } = require('playwright');
         await page.keyboard.press('Escape');
         assert.ok(!(await menu.evaluate(el => el.open)), 'Escape did not close menu');
         await menu.locator('summary').click();
-        await page.locator('.landing-hero h1').click();
+        // Click safely outside the popup. A sticky header can cover the h1 after anchor navigation.
+        await page.mouse.click(14, 450);
         assert.ok(!(await menu.evaluate(el => el.open)), 'Outside click did not close menu');
         const hitSizes = await page.evaluate(() => ({
           menu: document.querySelector('.landing-mobile-nav summary').getBoundingClientRect().height,
