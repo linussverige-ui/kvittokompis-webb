@@ -1478,3 +1478,34 @@ html { scroll-padding-top:82px; }
 @media(prefers-reduced-motion:reduce) {
   .landing-header { -webkit-backdrop-filter:none; backdrop-filter:none; }
 }
+
+
+/* Mid-size devices use a two-column hero instead of an excessively tall stacked one. */
+@media(min-width:650px) and (max-width:800px) {
+  .landing-hero__grid {
+    grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+    align-items:center; gap:23px;
+    padding-top:40px!important; padding-bottom:40px!important;
+  }
+  .landing-hero h1 { font-size:clamp(31px,4.6vw,38px); }
+  .landing-lead { font-size:14px; line-height:1.55; }
+  .landing-showcase { max-width:300px; }
+  .landing-preview { max-width:296px; border-width:4px; }
+  .landing-preview__body { padding:13px 11px 8px; }
+  .landing-preview__body h2 { font-size:18px; }
+  .landing-preview__capture { padding:10px; margin-bottom:12px; }
+  .landing-floating-label { right:-5px; bottom:9%; }
+  .landing-hero__actions .landing-button--secondary {
+    border:0; background:transparent; box-shadow:none;
+    min-height:44px; padding:6px 2px; font-size:13px;
+    text-decoration:underline; text-underline-offset:4px;
+  }
+  .landing-trust__inner {
+    min-height:0; gap:4px;
+    padding-top:12px!important; padding-bottom:12px!important;
+  }
+}
+@media(max-width:550px) {
+  .landing-header__app { min-height:44px; }
+  .landing-mobile-nav summary { min-height:44px; width:44px; }
+}
