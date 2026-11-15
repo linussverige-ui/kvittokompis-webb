@@ -25,6 +25,7 @@
       <nav class="landing-nav" aria-label="Huvudmeny">
         <a href="#sa-funkar-det">Så funkar det</a>
         <a href="#funktioner">Funktioner</a>
+        <a href="#redovisare">PDF för redovisaren</a>
         <a href="#planer">Planer</a>
         <a href="#fragor">Frågor</a>
         <a class="landing-nav__login" href="https://kvittokompis-test-2q67.onrender.com/login" rel="noopener noreferrer">Öppna testapp <span aria-hidden="true">↗</span></a>
@@ -34,6 +35,7 @@
         <summary><span class="landing-mobile-nav__label">Meny</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
         <nav aria-label="Mobilmeny">
           <a href="#sa-funkar-det">Så funkar det</a>
+          <a href="#redovisare">PDF till redovisaren</a>
           <a href="#funktioner">Funktioner</a>
           <a href="#installera">Installera</a>
           <a href="#fragor">Vanliga frågor</a>
@@ -48,18 +50,18 @@
         <div class="landing-hero__copy">
           <p class="landing-eyebrow"><span class="landing-eyebrow__dot" aria-hidden="true"></span> KvittoKompis för hantverkare</p>
           <h1 id="landing-title">Mer tid till jobbet.<br><span>Mindre tid till kvitton.</span></h1>
-          <p class="landing-lead">Fota eller lägg in kvitton, hitta dem enkelt och granska belopp och moms inför redovisningen. Du har kontrollen – utan krav på AI.</p>
+          <p class="landing-lead">Fota, samla och kontrollera kvitton. Förbered tydliga PDF- och Excel-underlag att lämna till din redovisare – utan krav på AI.</p>
           <div class="landing-hero__actions">
             
             <a class="landing-button landing-button--primary" href="https://kvittokompis-test-2q67.onrender.com/login" rel="noopener noreferrer">Öppna testappen <span aria-hidden="true">↗</span></a>
             
-            <a class="landing-button landing-button--secondary" href="#installera">Installera <span aria-hidden="true">↓</span></a>
+            <a class="landing-button landing-button--secondary" href="#redovisare">Se PDF-underlag <span aria-hidden="true">↓</span></a>
           </div>
           <p class="landing-hero__note">Skyddad testmiljö. Använd endast påhittade testuppgifter – inte riktiga kundkvitton.</p>
           <div class="landing-hero__points" aria-label="Våra produktprinciper">
             <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg> Mobilen först</span>
             <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg> Utan AI-krav</span>
-            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg> Kontroll före export</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg> PDF för redovisaren</span>
           </div>
         </div>
         <div class="landing-showcase" aria-label="Illustrativ förhandsvisning av ett kvittoflöde">
@@ -133,9 +135,39 @@
           <article class="landing-step">
             <div class="landing-step__number">03</div>
             <span class="landing-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h8m-8 4h8m-8 4h4"/><path d="m15 16 2 2 4-4"/></svg></span>
-            <h3>Hitta och förbered</h3>
-            <p>Samla kvitton och förbered rapporter som kan granskas tillsammans med redovisaren.</p>
+            <h3>Ta fram underlag</h3>
+            <p>Förbered PDF och Excel för granskning och vidare delning med redovisaren.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-accountant" id="redovisare" aria-labelledby="landing-accountant-title">
+      <div class="landing-container landing-accountant__grid">
+        <div class="landing-accountant__copy">
+          <p class="landing-section__eyebrow">Underlag till redovisaren</p>
+          <h2 id="landing-accountant-title">Från kvitton till ett underlag som är enkelt att lämna vidare.</h2>
+          <p>Samla dina kvitton, kontrollera belopp och moms och ta fram ett tydligt PDF-underlag med tillhörande kvittobilagor. Excel kan komplettera när din redovisare vill arbeta vidare med uppgifterna.</p>
+          <ol class="landing-accountant__steps">
+            <li><strong>Välj kvitton</strong><span>Hitta rätt underlag för perioden.</span></li>
+            <li><strong>Granska uppgifterna</strong><span>Kontrollera belopp, moms och bilagor.</span></li>
+            <li><strong>Exportera och dela</strong><span>Ladda ned filerna och skicka dem via din vanliga säkra kanal till redovisaren.</span></li>
+          </ol>
+          <p class="landing-accountant__note">PDF- och Excel-exporten samt kvittobilagorna kvalitetssäkras fortfarande. Direktdelning inifrån appen är inte verifierad. Testmiljön är inte avsedd för riktiga kundkvitton.</p>
+        </div>
+        <div class="landing-accountant__preview" role="img" aria-label="Illustration av ett PDF-underlag med kvittolista och separata kvittobilagor">
+          <div class="landing-accountant__paper">
+            <div class="landing-accountant__paper-head"><span class="landing-accountant__pdf-label">PDF</span><span>KvittoKompis</span></div>
+            <strong>Underlag till redovisning</strong>
+            <small>Exempel · November</small>
+            <div class="landing-accountant__paper-table">
+              <div><span>Materialinköp</span><strong>1 248,00 kr</strong></div>
+              <div><span>Drivmedel</span><strong>620,00 kr</strong></div>
+            </div>
+            <div class="landing-accountant__paper-total"><span>Summa, exempel</span><strong>1 868,00 kr</strong></div>
+            <div class="landing-accountant__attachments"><span aria-hidden="true">▤</span> Kvittobilagor till underlaget</div>
+          </div>
+          <p>Illustration – inte ett faktiskt exporterat dokument.</p>
         </div>
       </div>
     </section>
@@ -151,7 +183,7 @@
           <article class="landing-feature"><span aria-hidden="true">▧</span><h3>Samla kvitton</h3><p>Fota, välj en fil eller registrera manuellt.</p></article>
           <article class="landing-feature"><span aria-hidden="true">✓</span><h3>Granska själv</h3><p>Se över belopp och moms innan du går vidare.</p></article>
           <article class="landing-feature"><span aria-hidden="true">⌕</span><h3>Hitta snabbt</h3><p>Sök bland dina kvitton när du behöver dem.</p></article>
-          <article class="landing-feature"><span aria-hidden="true">▤</span><h3>Förbered underlag</h3><p>PDF och Excel utvecklas och kvalitetssäkras inför lansering.</p></article>
+          <article class="landing-feature"><span aria-hidden="true">▤</span><h3>Underlag för redovisaren</h3><p>PDF med kvittobilagor och Excel för vidare granskning.</p></article>
         </div>
       </div>
     </section>
@@ -244,7 +276,7 @@
           <details><summary>Måste jag använda AI?<span aria-hidden="true">+</span></summary><p>Nej. Du ska kunna registrera kvitton manuellt och själv kontrollera informationen. Valfri AI-hjälp är inte en förutsättning för grundflödet.</p></details>
           <details><summary>Är momsen alltid automatiskt korrekt?<span aria-hidden="true">+</span></summary><p>Nej, ett system bör inte lova det. Momssats och underlag måste kunna kontrolleras. Okänd moms ska inte presenteras som verifierad nollmoms.</p></details>
           <details><summary>Vad kommer KvittoKompis att kosta?<span aria-hidden="true">+</span></summary><p>Vi planerar en gratisversion och ett Premium-alternativ, men har ännu inte fastställt priser eller slutligt innehåll.</p></details>
-          <details><summary>Kan jag lämna underlag till min redovisare?<span aria-hidden="true">+</span></summary><p>PDF- och Excel-underlag finns i utvecklingsarbetet och genomgår fortfarande testning. Export är ett granskningsunderlag och ersätter inte kontroll eller bokföringsansvar.</p></details>
+          <details><summary>Hur lämnar jag PDF till min redovisare?<span aria-hidden="true">+</span></summary><p>Tanken är att du kontrollerar kvittona, exporterar PDF med tillhörande kvittobilagor och vid behov Excel. Därefter kan du lämna filerna via din vanliga säkra delningskanal. Automatisk skickning direkt till redovisaren är inte verifierad och exportfunktionen testas fortfarande. Underlaget ersätter inte bokföringsansvar eller kontroll.</p></details>
         </div>
       </div>
     </section>
@@ -270,6 +302,7 @@
       </div>
       <nav aria-label="Sidfotslänkar">
         <a href="#sa-funkar-det">Så fungerar det</a>
+        <a href="#redovisare">PDF till redovisaren</a>
         <a href="#fragor">Vanliga frågor</a>
         <a href="#installera">Installera</a>
         <a href="#planer">Planer</a>
