@@ -1,0 +1,45 @@
+name: Publicera KvittoKompis till GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "landing.css"
+      - "assets/**"
+      - ".nojekyll"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hämta hemsidan
+        uses: actions/checkout@v4
+      - name: Konfigurera Pages
+        uses: actions/configure-pages@v5
+      - name: Packa enbart publika webbplatsfiler
+        run: |
+          mkdir -p _site/assets
+          cp index.html landing.css .nojekyll _site/
+          cp assets/*.svg _site/assets/
+      - name: Ladda upp Pages-filer
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Publicera
+        id: deployment
+        uses: actions/deploy-pages@v4
